@@ -1,6 +1,6 @@
-provider "aws" {
-  profile = "reut"
-  region = "us-east-1"
+ provider "aws" {
+    profile = reut
+    region = us-east-1
 }
 
 data "aws_ami" "ubuntu" {
@@ -19,33 +19,23 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
-resource "aws_instance" "web" {
+resource "aws_instance" "Reut_terraform_test" {
+  name = "Reut"
+  count = 2
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.medium"
-
+  vpc = "reut_ops"
+  subnet_id = "subnet-01792509a3e220b16"
+}
+  ebs_block_device {
+  device_name = "/dev/xvdf"
+  volume_size = 10 
+  
   tags = {
-    Name = "Reut_1_terraform"
-    purpose = "Terraform hw exe4"
-  }
+  Name = "Reut_server ${count.index}"
+  purpose = "Terraform hw exe4"
 }
 
-resource "aws_volume_attachment" "ebs_att" {
-  device_name = "/dev/sdb" #Not sure about that
-  volume_id   = aws_ebs_volume.example.id
-  instance_id = aws_instance.web.id
-}
 
-resource "aws_instance" "web" {
-  ami               = "ami-21f78e11"
-  availability_zone = "us-east-1"
-  instance_type     = "t2.medium"
 
-  tags = {
-    Name = "HelloWorld"
-  }
-}
 
-resource "aws_ebs_volume" "example" {
-  availability_zone = "us-east-1"
-  size              = 10
-}
