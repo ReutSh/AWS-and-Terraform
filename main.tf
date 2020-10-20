@@ -20,22 +20,17 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "Reut_terraform_test" {
-  name = "Reut"
   count = 2
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.medium"
-  vpc = "reut_ops"
   subnet_id = "subnet-01792509a3e220b16"
-}
-  ebs_block_device {
-  device_name = "/dev/xvdf"
+
+  ebs_block_device  {
+  device_name = "xvdf"
   volume_size = 10 
+} 
   
   tags = {
   Name = "Reut_server ${count.index}"
   purpose = "Terraform hw exe4"
 }
-
-
-
-
