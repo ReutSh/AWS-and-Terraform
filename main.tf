@@ -26,22 +26,19 @@ resource "aws_instance" "Reut_terraform_test" {
   user_data = file(nginx.sh)
   key_name = "Reut"
   subnet_id = "subnet-01792509a3e220b16"
-  }
-  
-  
-  ebs_block_device  {
+  } 
+
+  resource ebs_block_device "Reut_extra" {
   device_name = "xvdf"
-  instance_id = aws_ami.ubuntu.id
-  volume_id = gp2
   volume_size = 10
-    }
-
-
-  tags = {
-  Name = "Reut_terraform_test ${count.index}"
-  purpose = "Terraform hw exe4" 
   }
-}
+
+   tags = {
+      Name = "Reut_terraform_test ${count.index}" 
+      purpose = "Terraform hw exe4" 
+      ebs_volume = "Reut_extra"  
+  }
+
 
 
 
