@@ -23,22 +23,21 @@ resource "aws_instance" "Reut_terraform_test" {
   count = 2
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.medium"
-  user_data = file(nginx.sh)
+  user_data = file (nginx.sh)
   key_name = "Reut"
   subnet_id = "subnet-01792509a3e220b16"
   } 
 
-  resource ebs_block_device "Reut_extra" {
+  ebs_block_device {
   device_name = "xvdf"
+  type = "gp2"
   volume_size = 10
-  }
+    }
 
-   tags = {
+  tags {
       Name = "Reut_terraform_test ${count.index}" 
-      purpose = "Terraform hw exe4" 
-      ebs_volume = "Reut_extra"  
-  }
-
+      purpose = "Terraform hw exe4"  
+    }
 
 
 
