@@ -2,7 +2,7 @@
 # Nginx
 
 resource "aws_security_group" "nginx_instnaces_access" {
-  vpc_id = aws_vpc.reut_vpc.id
+  vpc_id = module.vpc_module_reut.vpc_id # you set : aws_vpc.reut_vpc.id . fixed. this is resouce that created in your module and not in your guest project. so you need to set it as module reffernce.
   name   = "nginx-access"
 
   tags = {
@@ -43,7 +43,7 @@ resource "aws_security_group_rule" "nginx_outbound_anywhere" {
 # DB
 
 resource "aws_security_group" "DB_instnaces_access" {
-  vpc_id = aws_vpc.reut_vpc.id
+  vpc_id = module.vpc_module_reut.vpc_id # you set : aws_vpc.reut_vpc.id . fixed. this is resouce that created in your module and not in your guest project. so you need to set it as module reffernce.
   name   = "DB-access"
 
   tags = {

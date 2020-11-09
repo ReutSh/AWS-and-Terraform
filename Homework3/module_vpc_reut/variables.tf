@@ -18,7 +18,7 @@ variable "private_subnets_cidr" {
 
 variable "route_tables_names" {
   type    = list(string)
-  default = ["public", "private_rt_1","private_rt_2"]  
+  default = ["public", "private_rt_1","private_rt_2"]  #Just to make the project cleaner, do not add rt only to private, you should also add to public, or delete the rt from everyone. To be aligned and clean.
 }
 
 
