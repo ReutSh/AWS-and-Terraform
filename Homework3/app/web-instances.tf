@@ -2,10 +2,11 @@
 resource "aws_instance" "nginx" {
   count                       = var.count_nginx_instances
   ami                         = data.aws_ami.ubuntu-18.id
-  instance_type               = var.instance_type #you set: instance_type . fixed. should be with referrnce to the variable
-  user_data                   = file("nginx.sh")  # fixed. you set: fie("nginx.sh"). should be file not fie
+  instance_type               = var.instance_type 
+  user_data                   = file("nginx.sh")  
   key_name                    = var.key_name
-  subnet_id                   = module.vpc_module_reut.public_subnets_id[count.index] # you set: module.vpc_module_reut.public_subnet_id[count.index] you set the name of this output with subnets (s) no subnet that's why it didn't work for you .
+  iam_instance_profile        = "s3_access_role"
+  subnet_id                   = module.module_vpc_reut.public_subnets_id[count.index] 
   vpc_security_group_ids      = [aws_security_group.nginx_instnaces_access.id]
   associate_public_ip_address = true
 

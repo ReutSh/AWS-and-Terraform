@@ -9,17 +9,16 @@ description = "the cidr block chosed for the vpc, for exampe - 10.0.0.0/16 "
 variable "public_subnets_cidr" {
   type        = list(string)
   description = "list of public subnets, for example ['10.0.100.0/24', '10.0.200.0/24']"
+  default = ["10.0.3.0/24", "10.0.4.0/24"]
 }
 
 variable "private_subnets_cidr" {
   type        = list(string)
-  description = "list of private subnets, for example ['10.0.1.0/24', '10.0.2.0/24']"
+  description = "list of private subnets, for example ['10.0.1.0/24', '10.0.2.0/24']" 
+  default = ["10.0.5.0/24", "10.0.6.0/24"]
 }
 
 variable "route_tables_names" {
   type    = list(string)
-  default = ["public", "private_rt_1","private_rt_2"]  #Just to make the project cleaner, do not add rt only to private, you should also add to public, or delete the rt from everyone. To be aligned and clean.
+  default = ["public", "private_rt_1","private_rt_2"] 
 }
-
-
-

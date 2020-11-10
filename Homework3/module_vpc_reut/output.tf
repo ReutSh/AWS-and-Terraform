@@ -1,5 +1,5 @@
 output "vpc_id" {
-    value = aws_vpc.reut_vpc.id #fixed. you set: aws_vpc.reut_vpc.*.id . why ".*.id"?? you have only one vpc. you need the syntax with the * just when you create more than one resources in block
+    value = aws_vpc.reut_vpc.id 
 }
 
 output "public_subnets_id" {
