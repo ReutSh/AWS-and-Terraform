@@ -7,5 +7,5 @@ sed -i '15,23d' /var/www/html/index.nginx-debian.html
 service nginx restart
 
 sudo apt install awscli -y
-(crontab -l && echo "* 1 * * * /usr/bin/aws s3 cp /var/log/nginx/access.log s3://remote-state-opsschool-tf) | crontab -
+(crontab -l && echo "* 1 * * * /usr/bin/aws s3 cp /var/log/nginx/access.log s3://remote-state-opsschool-tf") | crontab -
 
